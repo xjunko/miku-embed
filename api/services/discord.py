@@ -41,7 +41,9 @@ class DiscordInfo:
 
     @property
     def description(self) -> str:
-        return "Currently online"
+        return ["Currently online", "In Real Life"][
+            self.data["discord_status"] == "offline"
+        ]
 
     @property
     def name(self) -> str:
