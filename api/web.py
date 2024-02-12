@@ -4,19 +4,38 @@ from flask import Flask
 from flask import render_template
 from flask import Response
 
-from api.spotify import SpotifyAPI
-from api.spotify import SpotifyInfo
+from api import blobs
+from api.services.discord import DiscordAPI
+from api.services.discord import DiscordInfo
+from api.services.spotify import SpotifyAPI
+from api.services.spotify import SpotifyInfo
 
 app = Flask(__name__)
+
 spotify = SpotifyAPI()
+discord = DiscordAPI()
 
 
-@app.route("/")
-def index() -> Response:
+@app.route("/spotify")
+def spotify_info() -> Response:
     current_info: SpotifyInfo = spotify.get_current_info()
 
     resp = Response(
-        render_template("profile.svg", current_info=current_info),
+        render_template("spotify.svg", current_info=current_info),
+        mimetype="image/svg+xml",
+    )
+
+    resp.headers["Cache-Control"] = "s-maxage=1"
+
+    return resp
+
+
+@app.route("/discord")
+def discord_info() -> Response:
+    current_info: DiscordInfo = discord.get_current_info()
+
+    resp = Response(
+        render_template("discord.svg", current_info=current_info, blobs=blobs),
         mimetype="image/svg+xml",
     )
 
