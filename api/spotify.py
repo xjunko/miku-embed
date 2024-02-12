@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import json
 import os
 from base64 import b64encode
 from dataclasses import dataclass
@@ -65,11 +64,11 @@ class SpotifyInfo:
 
     @property
     def progress(self) -> int:
-        return self.data["progress_ms"]
+        return self.data.get("progress_ms", 0)
 
     @property
     def duration(self) -> int:
-        return self.item["duration_ms"]
+        return self.item.get("duration_ms", 0)
 
     @property
     def progress_formatted(self) -> str:
@@ -137,7 +136,6 @@ class SpotifyAPI:
     def get_current_info(self) -> SpotifyInfo:
         for endpoint in [SpotifyAPI.NOW_PLAYING_URL, SpotifyAPI.RECENTLY_PLAYING_URL]:
             if data := self.get_data(endpoint):
-                open("data.json", "w").write(json.dumps(data))
                 return SpotifyInfo(data=data)
         else:
             print("Failure to get data.")
