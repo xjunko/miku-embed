@@ -1,8 +1,14 @@
 {
-    "redirects": [
+    "builds": [
         {
-            "source": "/source",
-            "destination": "https://github.com/xjunko/spotify"
+            "src": "api/web.py",
+            "use": "@vercel/python"
+        }
+    ],
+    "routes": [
+        {
+            "src": "/(.*)",
+            "dest": "api/web.py"
         }
     ]
 }
