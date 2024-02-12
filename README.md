@@ -1,7 +1,7 @@
 <img src="https://media1.tenor.com/m/S0_JXKLVj2AAAAAd/hatsune-miku-miku.gif" width="320" height="auto" align="right" style="float: right; margin: 0 10px 0 0;" >
 
 
-## Spotify [Embed]
+## MikuEmbed
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
 
