@@ -1,4 +1,4 @@
-<img src="https://media1.tenor.com/m/S0_JXKLVj2AAAAAd/hatsune-miku-miku.gif" width="auto" height="200" align="right" style="float: right; margin: 0 10px 0 0;" >
+<img src="https://media1.tenor.com/m/S0_JXKLVj2AAAAAd/hatsune-miku-miku.gif" width="320" height="auto" align="right" style="float: right; margin: 0 10px 0 0;" >
 
 
 ## Spotify [Embed]
