@@ -92,7 +92,7 @@
 
                 <!-- Cover -->
                 <div class='spotify-cover'>
-                    <img src="{{current_info.avatar}}"/>
+                    <img src='data:image/png;base64, {{current_info.avatar}}'/>
                 </div>
 
                 <!-- Info -->

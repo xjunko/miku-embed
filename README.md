@@ -22,4 +22,5 @@ my own version of [[novatorem's]](https://github.com/novatorem/novatorem) spotif
 - point to a domain, profit
 
 #### preview
-<img src="https://lets-all-love-miku.vercel.app/" width="395" align="center">  
+<img src="https://lets-all-love-miku.vercel.app/spotify" width="395" align="center">
+<img src="https://lets-all-love-miku.vercel.app/discord" width="395" align="center">

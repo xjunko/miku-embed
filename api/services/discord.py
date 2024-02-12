@@ -1,7 +1,10 @@
 from __future__ import annotations
 
+import base64
 import os
+import re
 from dataclasses import dataclass
+from dataclasses import field
 from typing import Any
 
 import requests
@@ -10,6 +13,7 @@ import requests
 @dataclass
 class DiscordInfo:
     data: dict[str, Any]
+    _avatar_cache: bytes = field(default=b"")
 
     @property
     def user(self) -> dict[str, Any]:
@@ -44,8 +48,15 @@ class DiscordInfo:
         return self.user["display_name"]
 
     @property
-    def avatar(self) -> str:
-        return f"https://cdn.discordapp.com/avatars/{self.user['id']}/{self.user['avatar']}.png?size=128"
+    def avatar(self) -> bytes:
+        if not self._avatar_cache:
+            self._avatar_cache = base64.b64encode(
+                requests.get(
+                    f"https://cdn.discordapp.com/avatars/{self.user['id']}/{self.user['avatar']}.png?size=128",
+                ).content,
+            ).decode("ascii")
+
+        return self._avatar_cache
 
 
 class DiscordAPI:
