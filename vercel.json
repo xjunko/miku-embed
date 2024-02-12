@@ -1,0 +1,8 @@
+{
+    "redirects": [
+        {
+            "source": "/source",
+            "destination": "https://github.com/xjunko/spotify"
+        }
+    ]
+}
