@@ -6,3 +6,6 @@
 
 # Pycache
 __pycache__
+
+# The usual
+.venv/*
