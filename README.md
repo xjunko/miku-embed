@@ -2,11 +2,12 @@
 
 
 ## Spotify [Embed]
-
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
 
+
 my own version of [[novatorem's]](https://github.com/novatorem/novatorem) spotify embed. cant be called a fork anymore as i rewrote the whole thing to fit my own needs but eh whatever who cares.
+
 
 ### deploying
 
@@ -19,3 +20,6 @@ my own version of [[novatorem's]](https://github.com/novatorem/novatorem) spotif
 - install requirements
 - launch with uvicorn/gunicorn
 - point to a domain, profit
+
+#### preview
+<img src="https://lets-all-love-miku.vercel.app/" width="395" align="center">  
