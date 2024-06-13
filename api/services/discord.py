@@ -47,14 +47,21 @@ class DiscordInfo:
 
     @property
     def name(self) -> str:
-        return self.user["display_name"]
+        return self.user["display_name"] or self.user["username"]
 
     @property
     def avatar(self) -> bytes:
         if not self._avatar_cache:
+            # Default: https://cdn.discordapp.com/embed/avatars/1.png
+            URL_AVATAR: str = f"https://cdn.discordapp.com/avatars/{self.user['id']}/{self.user['avatar']}.png?size=128"
+            
+            if response := requests.get(URL_AVATAR):
+                if response.status != 200:
+                    URL_AVATAR = "https://cdn.discordapp.com/embed/avatars/1.png"
+                    
             self._avatar_cache = base64.b64encode(
                 requests.get(
-                    f"https://cdn.discordapp.com/avatars/{self.user['id']}/{self.user['avatar']}.png?size=128",
+                    URL_AVATAR
                 ).content,
             ).decode("ascii")
 
