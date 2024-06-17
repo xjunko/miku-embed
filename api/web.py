@@ -10,11 +10,6 @@ from api.services.discord import DiscordInfo
 from api.services.spotify import SpotifyAPI
 from api.services.spotify import SpotifyInfo
 
-app = Flask(__name__)
-
-spotify = SpotifyAPI()
-discord = DiscordAPI()
-
 
 @app.route("/spotify")
 def spotify_info() -> Response:
@@ -42,3 +37,15 @@ def discord_info() -> Response:
     resp.headers["Cache-Control"] = "s-maxage=1"
 
     return resp
+
+
+@app.route("/spotify.json")
+def spotify_info_json() -> SpotifyInfo:
+    current_info: SpotifyInfo = spotify.get_current_info()
+    return current_info
+
+
+@app.route("/discord.json")
+def discord_info_json() -> DiscordInfo:
+    current_info: DiscordInfo = discord.get_current_info()
+    return current_info
