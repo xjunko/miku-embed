@@ -10,6 +10,11 @@ from api.services.discord import DiscordInfo
 from api.services.spotify import SpotifyAPI
 from api.services.spotify import SpotifyInfo
 
+app = Flask(__name__)
+
+spotify = SpotifyAPI()
+discord = DiscordAPI()
+
 
 @app.route("/spotify")
 def spotify_info() -> Response:
