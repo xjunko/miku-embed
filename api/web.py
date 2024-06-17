@@ -47,10 +47,10 @@ def discord_info() -> Response:
 @app.route("/spotify.json")
 def spotify_info_json() -> SpotifyInfo:
     current_info: SpotifyInfo = spotify.get_current_info()
-    return current_info
+    return current_info.data
 
 
 @app.route("/discord.json")
 def discord_info_json() -> DiscordInfo:
     current_info: DiscordInfo = discord.get_current_info()
-    return current_info
+    return current_info.data
