@@ -54,14 +54,12 @@ class DiscordInfo:
         if not self._avatar_cache:
             # Default: https://cdn.discordapp.com/embed/avatars/1.png
             URL_AVATAR: str = f"https://cdn.discordapp.com/avatars/{self.user['id']}/{self.user['avatar']}.png?size=128"
-            
+
             if not self.user["avatar"]:
                 URL_AVATAR = "https://cdn.discordapp.com/embed/avatars/1.png"
-                    
+
             self._avatar_cache = base64.b64encode(
-                requests.get(
-                    URL_AVATAR
-                ).content,
+                requests.get(URL_AVATAR).content,
             ).decode("ascii")
 
         return self._avatar_cache

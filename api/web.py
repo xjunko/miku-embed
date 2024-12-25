@@ -1,12 +1,16 @@
 from __future__ import annotations
 
-from fastapi import FastAPI, Request
-from fastapi.responses import HTMLResponse, Response
+from fastapi import FastAPI
+from fastapi import Request
+from fastapi.responses import HTMLResponse
+from fastapi.responses import Response
 from fastapi.templating import Jinja2Templates
 
 from api import blobs
-from api.services.discord import DiscordAPI, DiscordInfo
-from api.services.spotify import SpotifyAPI, SpotifyInfo
+from api.services.discord import DiscordAPI
+from api.services.discord import DiscordInfo
+from api.services.spotify import SpotifyAPI
+from api.services.spotify import SpotifyInfo
 
 app = FastAPI()
 templates = Jinja2Templates(directory="api/templates")
@@ -20,7 +24,9 @@ def spotify_info(request: Request) -> HTMLResponse:
     current_info: SpotifyInfo = spotify.get_current_info()
 
     resp = templates.TemplateResponse(
-        request=request, name="spotify.svg", context={"current_info": current_info}
+        request=request,
+        name="spotify.svg",
+        context={"current_info": current_info},
     )
 
     resp.headers["Cache-Control"] = "s-maxage=1"
@@ -33,7 +39,9 @@ def spotify_info(request: Request) -> HTMLResponse:
     current_info: SpotifyInfo = spotify.get_current_info()
 
     resp = templates.TemplateResponse(
-        request=request, name="spotify_lite.svg", context={"current_info": current_info}
+        request=request,
+        name="spotify_lite.svg",
+        context={"current_info": current_info},
     )
 
     resp.headers["Cache-Control"] = "s-maxage=1"
