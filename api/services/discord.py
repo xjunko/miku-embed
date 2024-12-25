@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import base64
 import os
-import re
 from dataclasses import dataclass
 from dataclasses import field
 from typing import Any

@@ -19,6 +19,11 @@ spotify = SpotifyAPI()
 discord = DiscordAPI()
 
 
+@app.route("/")
+async def root():
+    return {"status": ":3"}
+
+
 @app.route("/spotify")
 def spotify_info(request: Request) -> HTMLResponse:
     current_info: SpotifyInfo = spotify.get_current_info()
