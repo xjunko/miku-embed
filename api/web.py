@@ -36,7 +36,7 @@ def spotify_info() -> Response:
 
 
 @app.route("/spotify-lite")
-def spotify_info() -> Response:
+def spotify_lite_info() -> Response:
     current_info: SpotifyInfo = spotify.get_current_info()
 
     resp = Response(
