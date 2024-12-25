@@ -1,28 +1,39 @@
 from __future__ import annotations
 
-from flask import Flask
-from flask import render_template
-from flask import Response
+from fastapi import FastAPI, Request
+from fastapi.responses import HTMLResponse, Response
+from fastapi.templating import Jinja2Templates
 
 from api import blobs
-from api.services.discord import DiscordAPI
-from api.services.discord import DiscordInfo
-from api.services.spotify import SpotifyAPI
-from api.services.spotify import SpotifyInfo
+from api.services.discord import DiscordAPI, DiscordInfo
+from api.services.spotify import SpotifyAPI, SpotifyInfo
 
-app = Flask(__name__)
+app = FastAPI()
+templates = Jinja2Templates(directory="api/templates")
 
 spotify = SpotifyAPI()
 discord = DiscordAPI()
 
 
 @app.route("/spotify")
-def spotify_info() -> Response:
+def spotify_info(request: Request) -> HTMLResponse:
     current_info: SpotifyInfo = spotify.get_current_info()
 
-    resp = Response(
-        render_template("spotify.svg", current_info=current_info),
-        mimetype="image/svg+xml",
+    resp = templates.TemplateResponse(
+        request=request, name="spotify.svg", context={"current_info": current_info}
+    )
+
+    resp.headers["Cache-Control"] = "s-maxage=1"
+
+    return resp
+
+
+@app.route("/spotify-lite")
+def spotify_info(request: Request) -> HTMLResponse:
+    current_info: SpotifyInfo = spotify.get_current_info()
+
+    resp = templates.TemplateResponse(
+        request=request, name="spotify_lite.svg", context={"current_info": current_info}
     )
 
     resp.headers["Cache-Control"] = "s-maxage=1"
@@ -31,14 +42,14 @@ def spotify_info() -> Response:
 
 
 @app.route("/discord")
-def discord_info() -> Response:
+def discord_info(request: Request) -> HTMLResponse:
     current_info: DiscordInfo = discord.get_current_info()
 
-    resp = Response(
-        render_template("discord.svg", current_info=current_info, blobs=blobs),
-        mimetype="image/svg+xml",
+    resp = templates.TemplateResponse(
+        request=request,
+        name="discord.svg",
+        context={"current_info": current_info, "blobs": blobs},
     )
-
     resp.headers["Cache-Control"] = "s-maxage=1"
 
     return resp
