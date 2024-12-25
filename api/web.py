@@ -1,11 +1,8 @@
 from __future__ import annotations
 
-from fastapi import FastAPI
-from fastapi import Request
-from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import HTMLResponse
-from fastapi.responses import JSONResponse
-from fastapi.templating import Jinja2Templates
+from flask import Flask
+from flask import render_template
+from flask import Response
 
 from api import blobs
 from api.services.discord import DiscordAPI
@@ -13,34 +10,24 @@ from api.services.discord import DiscordInfo
 from api.services.spotify import SpotifyAPI
 from api.services.spotify import SpotifyInfo
 
-app = FastAPI()
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-templates = Jinja2Templates(directory="api/templates")
+app = Flask(__name__)
 
 spotify = SpotifyAPI()
 discord = DiscordAPI()
 
 
 @app.route("/")
-async def index(_: Request) -> JSONResponse:
-    return JSONResponse({"status": ":3"})
+async def index() -> Response:
+    return {"status": ":3"}
 
 
 @app.route("/spotify")
-def spotify_info(request: Request) -> HTMLResponse:
+def spotify_info() -> Response:
     current_info: SpotifyInfo = spotify.get_current_info()
 
-    resp = templates.TemplateResponse(
-        request=request,
-        name="spotify.svg",
-        context={"current_info": current_info},
+    resp = Response(
+        render_template("spotify.svg", current_info=current_info),
+        mimetype="image/svg+xml",
     )
 
     resp.headers["Cache-Control"] = "s-maxage=1"
@@ -49,13 +36,12 @@ def spotify_info(request: Request) -> HTMLResponse:
 
 
 @app.route("/spotify-lite")
-def spotify_info(request: Request) -> HTMLResponse:
+def spotify_info() -> Response:
     current_info: SpotifyInfo = spotify.get_current_info()
 
-    resp = templates.TemplateResponse(
-        request=request,
-        name="spotify_lite.svg",
-        context={"current_info": current_info},
+    resp = Response(
+        render_template("spotify_lite.svg", current_info=current_info),
+        mimetype="image/svg+xml",
     )
 
     resp.headers["Cache-Control"] = "s-maxage=1"
@@ -64,13 +50,12 @@ def spotify_info(request: Request) -> HTMLResponse:
 
 
 @app.route("/discord")
-def discord_info(request: Request) -> HTMLResponse:
+def discord_info() -> Response:
     current_info: DiscordInfo = discord.get_current_info()
 
-    resp = templates.TemplateResponse(
-        request=request,
-        name="discord.svg",
-        context={"current_info": current_info, "blobs": blobs},
+    resp = Response(
+        render_template("discord.svg", current_info=current_info, blobs=blobs),
+        mimetype="image/svg+xml",
     )
     resp.headers["Cache-Control"] = "s-maxage=1"
 
