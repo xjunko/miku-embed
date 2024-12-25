@@ -17,7 +17,7 @@ discord = DiscordAPI()
 
 
 @app.route("/")
-async def index() -> Response:
+def index() -> Response:
     return {"status": ":3"}
 
 
