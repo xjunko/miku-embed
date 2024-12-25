@@ -1,5 +1,5 @@
-<svg width="190" height="60" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <foreignObject width="190" height="60">
+<svg width="290" height="60" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <foreignObject width="290" height="60">
         <link rel="stylesheet" type="text/css" media="screen"
             href="https://cdn.rawgit.com/resir014/Clear-Sans-Webfont/v1.1.1/css/clear-sans.css">
         </link>
@@ -47,8 +47,9 @@
                 }
 
                 .spotify-info {
-                    width: 115px;
-                    max-width: 115px;
+                    width: 190px;
+                    max-width: 190px;
+                    overflow: hidden;
                 }
 
                 .spotify-info a {
@@ -79,9 +80,7 @@
                 <!-- Info -->
                 <div class="spotify-info">
                     <a href="{{current_info.song_url}}" target="_blank">
-                        <marquee>
-                            <div class="spotify-song">{{current_info.song_name}}</div>
-                        </marquee>
+                        <div class="spotify-song">{{current_info.song_name}}</div>
                     </a>
 
                     <a href="{{current_info.artist_url}}" target="_blank">
