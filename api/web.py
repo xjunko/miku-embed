@@ -2,8 +2,9 @@ from __future__ import annotations
 
 from fastapi import FastAPI
 from fastapi import Request
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
-from fastapi.responses import Response
+from fastapi.responses import JSONResponse
 from fastapi.templating import Jinja2Templates
 
 from api import blobs
@@ -13,6 +14,14 @@ from api.services.spotify import SpotifyAPI
 from api.services.spotify import SpotifyInfo
 
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 templates = Jinja2Templates(directory="api/templates")
 
 spotify = SpotifyAPI()
@@ -20,8 +29,8 @@ discord = DiscordAPI()
 
 
 @app.route("/")
-async def root():
-    return {"status": ":3"}
+async def index(_: Request) -> JSONResponse:
+    return JSONResponse({"status": ":3"})
 
 
 @app.route("/spotify")
