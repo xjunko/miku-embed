@@ -24,4 +24,5 @@ my own version of [[novatorem's]](https://github.com/novatorem/novatorem) spotif
 #### preview
 <img src="https://lets-all-love-miku.vercel.app/spotify" width="395" align="center">
 <img src="https://lets-all-love-miku.vercel.app/spotify-lite" width="190" align="center">
+<img src="https://lets-all-love-miku.vercel.app/spotify-lite-white" width="190" align="center">
 <img src="https://lets-all-love-miku.vercel.app/discord" width="395" align="center">
