@@ -48,6 +48,20 @@ def spotify_lite_info() -> Response:
 
     return resp
 
+@app.route("/spotify-lite-white")
+def spotify_lite_info() -> Response:
+    current_info: SpotifyInfo = spotify.get_current_info()
+
+    resp = Response(
+        render_template("spotify_lite_white.svg", current_info=current_info),
+        mimetype="image/svg+xml",
+    )
+
+    resp.headers["Cache-Control"] = "s-maxage=1"
+
+    return resp
+
+
 
 @app.route("/discord")
 def discord_info() -> Response:
