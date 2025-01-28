@@ -49,7 +49,7 @@ def spotify_lite_info() -> Response:
     return resp
 
 @app.route("/spotify-lite-white")
-def spotify_lite_info() -> Response:
+def spotify_lite_white_info() -> Response:
     current_info: SpotifyInfo = spotify.get_current_info()
 
     resp = Response(
